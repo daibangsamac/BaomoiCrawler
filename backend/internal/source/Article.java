@@ -80,7 +80,10 @@ public class Article {
 		data.put("topic", this.topic);
 		data.put("content", this.content);
 
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        Gson gson = new GsonBuilder()
+				.setPrettyPrinting()	
+				.disableHtmlEscaping() 
+                .create();
 
         try (FileWriter writer = new FileWriter(path + this.title.replaceAll("[\\\\/:*?\"<>|]", "_") + ".json")) {
             gson.toJson(data, writer); 
