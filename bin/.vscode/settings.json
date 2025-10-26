@@ -1,0 +1,12 @@
+{
+    "java.debug.settings.vmArgs": "-Dfile.encoding=UTF-8",
+    "files.encoding": "utf8",
+    "terminal.integrated.env.windows": {
+        "JAVA_TOOL_OPTIONS": "-Dfile.encoding=UTF-8"
+    },
+    "java.project.sourcePaths": ["."],
+    "java.project.outputPath": "bin",
+    "java.project.referencedLibraries": [
+        "libs/**/*.jar"
+    ]
+}
