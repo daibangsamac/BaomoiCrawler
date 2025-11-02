@@ -12,15 +12,6 @@ Use cases include: collecting news articles, titles, descriptions and urls.
 
 ---
 
-## Installation
-
-1. Clone the repository:
-
-```bash
-git clone https://github.com/daibangsamac/BaomoiCrawler.git
-cd BaomoiCrawler
-```
-
 ## Project Structure
 
 ```
@@ -47,9 +38,17 @@ web-crawler/
 
 ---
 
-## Usage
+# Usage
 
-### Java
+## Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/daibangsamac/BaomoiCrawler.git
+cd BaomoiCrawler
+```
+## Java
 
 # For windows
 ```bash
@@ -63,7 +62,7 @@ java -cp "bin;libs/*" backend.cmd.Main
 `To be added`
 ---
 
-## Notes
+# Notes
 
 * Only crawl **public and legal** data.
 
