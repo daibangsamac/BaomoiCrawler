@@ -2,6 +2,7 @@ package backend.internal.source;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
@@ -11,6 +12,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.jsoup.nodes.Element;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Class Browser
@@ -24,17 +27,36 @@ public class Browser {
 	private String htmlPage;
 	private String type;
 	private String topic;
-	//private HTMLParser htmlParser;
 
 	/**
 	 * Constructor of Browser class, check if URL is valid
 	 * @param url The URL to be browsed
 	 * @throws IOException If an I/O error occurs
+	 * @throws InterruptedException If the sleep is interrupted
 	 */
-	public Browser(String url, String type,String topic) throws IOException {
+	public Browser(String url, String type,String topic) throws MalformedURLException,InterruptedException {
 		this.url = new URL(url);
 		this.type = type;
 		this.topic = topic;
+		int attemp = 1;
+		int MAX_ATTEMPT = 3;
+		while (!fetchURL() && attemp <= MAX_ATTEMPT) {
+			System.out.println("Failed to fetch URL: " + url);
+			try {
+				TimeUnit.SECONDS.sleep(4);
+			} catch (InterruptedException e) {
+				throw new InterruptedException("Sleep interrupted while retrying to fetch URL: " + url);
+			}
+			System.out.println("Retrying to fetch URL: " + url + " (Attempt " + attemp + " of 3)");
+			attemp = attemp + 1;
+		}
+	}
+	
+	/**
+	 * Fetch the content of the URL in HTML
+	 * @throws IOException
+	 */
+	public boolean fetchURL() {
 		try { 
 			URLConnection urlCon = this.url.openConnection();	
 			BufferedReader bufferRead = new BufferedReader(new InputStreamReader(urlCon.getInputStream(), StandardCharsets.UTF_8));
@@ -48,10 +70,11 @@ public class Browser {
 			this.htmlPage = htmlBuilder.toString();
 		} catch (IOException e) {
 			this.type = null;
-			throw new IOException("Cannot connect to URL: " + url);
+			return false;
 		}
+		return true;
 	}
-	
+
 	/**
 	 * Get the URL as a string
 	 * @return String representation of the URL
@@ -124,7 +147,7 @@ public class Browser {
 	 * @return Article object containing parsed information
 	 * @throws IOException
 	 */
-	public Article parseArticle() throws IOException {
+	public Article parseArticlePage() throws IOException {
 		if (!this.type.equals("article"))
 			throw new IOException("This method is only for article page.");
 

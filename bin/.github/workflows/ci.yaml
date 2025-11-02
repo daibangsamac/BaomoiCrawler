@@ -1,0 +1,31 @@
+name: Java CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 8
+        uses: actions/setup-java@v3
+        with:
+          java-version: '8'
+          distribution: 'temurin'
+
+      - name: Compile Java sources
+        run: javac -cp "libs/*" -d bin $(find backend -name "*.java" || true)
+
+      - name: Run unit tests
+        run:  |
+          java -cp "bin:libs/*" org.junit.runner.JUnitCore backend.internal.test.ArticleTest
+          java -cp "bin:libs/*" org.junit.runner.JUnitCore backend.internal.test.BrowserTest
+          java -cp "bin:libs/*" org.junit.runner.JUnitCore backend.internal.test.CrawlerTest
+

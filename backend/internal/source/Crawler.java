@@ -1,6 +1,6 @@
 package backend.internal.source;
 import java.io.IOException;
-
+import java.net.MalformedURLException;
 import java.util.LinkedList;
 
 
@@ -33,8 +33,10 @@ public class Crawler {
 	 *   <li>Getting every article description.</li>
 	 * </ol>
 	 * @throws IOException
+	 * @throws MalformedURLException
+	 * @throws InterruptedException
 	 */
-	public void crawl() throws IOException {
+	public void crawl() throws IOException,MalformedURLException, InterruptedException {
 		// Check URL validity
 		try {
 			urlCheck();
@@ -45,20 +47,28 @@ public class Crawler {
 
 		int page = 1;
 		LinkedList<String> articleLinks = new LinkedList<String>();
+		
 		// Browsing the URL of summary page for all articles of the topic in range of pages  
 		final int MAX_PAGE = 166;
 		while (page <= MAX_PAGE) {
 			String browsingUrl = this.url + "/trang" + page + ".epi";
-			Browser summaryPage = new Browser(browsingUrl,"summary",topic);
-			page = page + 4;
-			System.out.println("Crawling: " + browsingUrl);
-			articleLinks.addAll(summaryPage.getLinksOfArticles());
+			try {
+				Browser summaryPage = new Browser(browsingUrl,"summary",topic);
+				page = page + 4;
+				System.out.println("Crawling: " + browsingUrl);
+				articleLinks.addAll(summaryPage.getLinksOfArticles());
+			} catch (InterruptedException e) {
+				throw new InterruptedException("Interrupted while fetching summary page: " + browsingUrl);
+			} catch (MalformedURLException e) {
+				throw new MalformedURLException("Malformed URL: " + browsingUrl);
+			}
+			
 		}
 		
 		// Browsing all articles and parsing needed information
 		for (String link : articleLinks) {
 			Browser articlePage = new Browser(link,"article",topic);
-			Article article = articlePage.parseArticle();
+			Article article = articlePage.parseArticlePage();
 			this.articles.add(article);
 			System.out.println("Parsed article: " + article.getTitle());
 		}
@@ -125,5 +135,19 @@ public class Crawler {
 		return this.topic;
 	}
 	
-	 
+	/**
+	 * Get list of crawled articles
+	 * @return LinkedList<Article> list of crawled articles
+	 */
+	public LinkedList<Article> getArticles() {
+		return articles;
+	}
+	
+	/**
+	 * Set list of crawled articles
+	 * @param articles
+	 */
+	public void setArticles(LinkedList<Article> articles) {
+		this.articles = articles;
+	}
 }
