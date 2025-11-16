@@ -38,7 +38,7 @@ E:.
             ├───model
             └───service
 ---
-
+```
 # Usage
 
 ## Installation
