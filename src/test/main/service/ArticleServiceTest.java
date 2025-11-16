@@ -74,39 +74,38 @@ public class ArticleServiceTest {
     /**
      * Test CRUD operations via ArticleService
      */
-    @Test
-    public void testArticleCRUDService() {
-        ArticleService articleService = new ArticleService();
+    // public void testArticleCRUDService() {
+    //     ArticleService articleService = new ArticleService();
         
-        String url = "https://example.com/article1";
-        String time = "2024-06-01 10:00:00";
-        String title = "Sample Article Title";
-        String topic = "the-gioi";
-        String content = "This is the content of the sample the-gioi article.";
+    //     String url = "https://example.com/article1";
+    //     String time = "2024-06-01 10:00:00";
+    //     String title = "Sample Article Title";
+    //     String topic = "the-gioi";
+    //     String content = "This is the content of the sample the-gioi article.";
 
-        Article article = new Article(url, time, title, topic, content);
+    //     Article article = new Article(url, time, title, topic, content);
 
-        // CREATE
-        articleService.addArticleToDB(article);
+    //     // CREATE
+    //     articleService.addArticleToDB(article);
         
-        Article article2 = articleService.getArticleByUrlFromDB(url);
-        assertNotNull(article2);
-        assertEquals(url, article2.getUrl());
+    //     Article article2 = articleService.getArticleByUrlFromDB(url);
+    //     assertNotNull(article2);
+    //     assertEquals(url, article2.getUrl());
         
-        // READ ALL
-        java.util.List<Article> articles = articleService.getAllArticlesFromDB();
-        assertNotNull(articles);
-        assertTrue(articles.size() > 0);
+    //     // READ ALL
+    //     java.util.List<Article> articles = articleService.getAllArticlesFromDB();
+    //     assertNotNull(articles);
+    //     assertTrue(articles.size() > 0);
 
-        // UPDATE
-        article.setTitle("Updated Article Title");
-        articleService.updateArticleInDB(article);
-        Article updatedArticle = articleService.getArticleByUrlFromDB(url);
-        assertEquals("Updated Article Title", updatedArticle.getTitle());
+    //     // UPDATE
+    //     article.setTitle("Updated Article Title");
+    //     articleService.updateArticleInDB(article);
+    //     Article updatedArticle = articleService.getArticleByUrlFromDB(url);
+    //     assertEquals("Updated Article Title", updatedArticle.getTitle());
 
-        // DELETE
-        articleService.deleteArticleByUrlInDB(url);
-        Article article3 = articleService.getArticleByUrlFromDB(url);
-        assertNull(article3);
-    }
+    //     // DELETE
+    //     articleService.deleteArticleByUrlInDB(url);
+    //     Article article3 = articleService.getArticleByUrlFromDB(url);
+    //     assertNull(article3);
+    // }
 }

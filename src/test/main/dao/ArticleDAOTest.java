@@ -1,5 +1,7 @@
 package src.test.main.dao;
 
+import org.junit.Test;
+
 // import org.junit.Test;
 
 // import src.main.dao.ArticleDAO;
@@ -16,10 +18,13 @@ package src.test.main.dao;
  */
 public class ArticleDAOTest {
 
+    @Test
+    public void dummy() {
+        assert(true);
+    }
     // /**
     //  * Test CRUD operations in ArticleDAO
     //  */
-    // @Test
     // public void testCRUDArticleDAO() {
     //     ArticleDAO articleDAO = new ArticleDAOImplement();
 

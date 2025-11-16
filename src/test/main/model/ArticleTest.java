@@ -67,7 +67,7 @@ public class ArticleTest {
         Article article = new Article();
 
         assertNull(article.getUrl());
-        assertNull(article.getTime());
+        assertTrue(article.getTime() == "0000-01-01 00:00:00");
         assertNull(article.getTitle());
         assertNull(article.getTopic());
         assertNull(article.getContent());

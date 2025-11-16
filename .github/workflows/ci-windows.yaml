@@ -33,12 +33,15 @@ jobs:
 
     - name: Compile Java sources
       run: |
-        set FILES= \
+        setlocal enabledelayedexpansion
+
+        set FILES=
         for /R src %%f in (*.java) do (
-            set FILES=!FILES! %%f
+          set FILES=!FILES! "%%f"
         )
-        javac -cp "libs/*" -d bin @FILES
-      shell: cmd
+
+        javac -cp "libs/*" -d bin !FILES!
+shell: cmd
 
     - name: Run Tests
       run: |
