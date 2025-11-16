@@ -1,4 +1,4 @@
-name: Java Build CI
+name: Java CI/CD - Windows
 
 on:
   push:
@@ -33,7 +33,7 @@ jobs:
 
     - name: Compile Java sources
       run: |
-        set FILES=
+        set FILES= \
         for /R src %%f in (*.java) do (
             set FILES=!FILES! %%f
         )
