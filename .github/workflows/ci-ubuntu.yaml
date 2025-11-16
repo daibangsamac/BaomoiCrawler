@@ -21,7 +21,10 @@ jobs:
           distribution: 'temurin'
 
       - name: Compile Java sources
-        run: javac -cp "libs/*" -d bin $(find src -name "*.java" || true)
+        run: |
+          if (exist bin) rmdir /s /q bin
+          mkdir bin
+          javac -cp "libs/*" -d bin $(find src -name "*.java" || true)
 
       - name: Run unit tests
         run:  |
