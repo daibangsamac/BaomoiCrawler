@@ -41,7 +41,7 @@ jobs:
         )
 
         javac -cp "libs/*" -d bin !FILES!
-shell: cmd
+      shell: cmd
 
     - name: Run Tests
       run: |
