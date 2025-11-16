@@ -46,12 +46,17 @@ jobs:
     - name: Run Tests
       run: |
         setlocal enabledelayedexpansion
-
+        REM Root folder tuyệt đối phải trùng với folder bin nằm trong đó
+        set ROOT=D:\a\BaomoiCrawler\BaomoiCrawler\
+        
         set CLASSES=
 
         for /R bin %%f in (*Test.class) do (
         set F=%%f
 
+        REM Bỏ root prefix
+        set F=!F:%ROOT%=!
+        
         REM Bỏ prefix bin\
         set F=!F:bin\=!
 
