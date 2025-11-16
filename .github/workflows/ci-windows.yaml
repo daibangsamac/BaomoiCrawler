@@ -27,8 +27,9 @@ jobs:
 
     - name: Prepare build directories
       run: |
-        if (exist bin) rmdir /s /q bin
+        if exist bin rmdir /s /q bin
         mkdir bin
+      shell: cmd
 
     - name: Compile Java sources
       run: |
