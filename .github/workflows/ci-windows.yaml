@@ -46,15 +46,31 @@ jobs:
     - name: Run Tests
       run: |
         setlocal enabledelayedexpansion
+
         set CLASSES=
+
         for /R bin %%f in (*Test.class) do (
-            set F=%%f
-            set F=!F:bin\=!
-            set F=!F:\=.! 
-            set F=!F:.class=!
-            set CLASSES=!CLASSES! !F!
+        set F=%%f
+
+        REM Bỏ prefix bin\
+        set F=!F:bin\=!
+
+        REM Đổi \ thành .
+        set F=!F:\=.!
+
+        REM Bỏ phần .class
+        set F=!F:.class=!
+
+        REM Bỏ dấu chấm đầu nếu có
+        if "!F:~0,1!"=="." set F=!F:~1!
+
+        set CLASSES=!CLASSES! !F!
         )
+
+        echo Running test classes: !CLASSES!
+
         for %%T in (!CLASSES!) do (
+            echo Running %%T
             java -cp "bin;libs/*" org.junit.runner.JUnitCore %%T
         )
       shell: cmd
