@@ -8,5 +8,6 @@
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
         "libs/**/*.jar"
-    ]
+    ],
+    "java.debug.settings.onBuildFailureProceed": true
 }

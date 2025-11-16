@@ -1,0 +1,17 @@
+E:\Code\Project\BaomoiCrawler\src\main\Main.java 
+E:\Code\Project\BaomoiCrawler\src\main\controller\CrawlerController.java 
+E:\Code\Project\BaomoiCrawler\src\main\dao\ArticleDAO.java 
+E:\Code\Project\BaomoiCrawler\src\main\dao\ArticleDAOImplement.java 
+E:\Code\Project\BaomoiCrawler\src\main\dao\BrowserDAO.java 
+E:\Code\Project\BaomoiCrawler\src\main\dao\CrawlerDAO.java 
+E:\Code\Project\BaomoiCrawler\src\main\model\Article.java 
+E:\Code\Project\BaomoiCrawler\src\main\model\Browser.java 
+E:\Code\Project\BaomoiCrawler\src\main\model\Crawler.java 
+E:\Code\Project\BaomoiCrawler\src\main\model\Parser.java 
+E:\Code\Project\BaomoiCrawler\src\main\service\ArticleService.java 
+E:\Code\Project\BaomoiCrawler\src\main\service\BrowserService.java 
+E:\Code\Project\BaomoiCrawler\src\main\service\CrawlerService.java 
+E:\Code\Project\BaomoiCrawler\src\main\service\ParserService.java 
+E:\Code\Project\BaomoiCrawler\src\main\util\AppLogger.java 
+E:\Code\Project\BaomoiCrawler\src\main\util\DBConnectionPool.java 
+E:\Code\Project\BaomoiCrawler\src\main\view\cliAppView.java 

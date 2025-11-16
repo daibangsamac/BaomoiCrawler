@@ -1,33 +1,101 @@
-# Change Log
+# Release Notes
 
-**Version 0** 
-
-* Old HTML layout and outdated URLs.
-* Basic implementation of `get`, `set`, and `fetch URL`.
-* No comments or in-depth documentation.
-* Functions mixed multiple responsibilities; class, attribute, and method names followed no consistent convention.
-* **Workflow:** Run `main` → prepare URLs by topic (e.g., World, Economy, Sports) → fetch each URL and parse static HTML for information → save locally as `.JSON` files (no database).
-* Since no 2014 snapshot of the original site was found, testing was not possible. However, based on the remaining data, this version likely performed its intended functions correctly.
+These release notes summarize the key updates, improvements, and performance changes across major versions of the project.
 
 ---
 
-**Version 1.0**
+## **Version 1.0.0 – Modular Architecture Release**
 
-* Aimed to improve **modifiability** and **testability** while maintaining basic functionality.
-* Updated folder structure and class design according to **SOLID** principles.
-* Added comments, documentation, and `README.md`.
-* Updated parsing logic and URLs for several topics.
-* Added logging and CI/CD integration.
-* **Workflow:** Run `main` → enqueue all summary page URLs → create a `Crawler` object → the crawler fetches each summary page to retrieve article URLs → fetch each article page for details → save locally → log progress.
-* **Performance:** Core functions now stable. However, around **2% fault rate** when fetching URLs, and up to **70% fatal error rate** when the target URL is a summary page.
+### 🎉 Highlights
+This release introduces a complete redesign of the system architecture, transitioning from a monolithic structure to a scalable, maintainable **5-layer modular architecture**.
+
+### 🚀 New Features
+- Added a structured 5-layer architecture:
+  - Model  
+  - Data Access Layer  
+  - Service  
+  - Controller  
+  - View  
+- Improved folder structure following SOLID principles.
+- Enhanced retry mechanism:
+  - Retry each request 5 times.
+  - If still failing, move to the end of the queue.
+  - Retry 5 more times on second attempt.
+  - Mark as error if still unsuccessful.
+- Updated parsing layout for several topics.
+- Updated URLs and CI/CD pipeline.
+- Added:
+  - `CHANGELOG.md`
+  - `RELEASE_NOTES.md`
+
+### 🔧 Improvements
+- Cleaner workflow:
+  ```
+  main → prepare URLs → enqueue → dequeue → Crawler → fetch summary pages → fetch articles → store in database
+  ```
+- Lower memory usage and higher stability.
+
+### 📊 Performance
+- **73 minutes** to process 15 major topics  
+- Error rate:
+  - Summary pages: **0%**
+  - Article pages: **0.07%**
+- Test coverage:
+  - 100 runs of 41×15 summary pages
+  - 3 runs of 2244×15 article pages
+- **Memory usage:** 180 MB database + 4 KB logs
 
 ---
 
-**Version 1.1**
+## **Version 0.5.0 – Enhanced Monolithic Architecture**
 
-* Focused on improving **availability** and **performance**.
-* Implemented a **retry pattern** for URL fetching with delayed retries.
+### 🚀 Highlights
+A stability-focused update improving the original monolithic version.
 
-  * **Drawback:** The entire application pauses while waiting for retries; future patches will introduce **multi-threading** and more advanced recovery strategies.
-* Introduced a **queue** to manage URLs to be fetched.
-* **Performance:** Fault rate for fetching article pages reduced to **0.2%**, and fatal errors for summary pages decreased to **10%**.
+### 🆕 New Features
+- Queue-based processing flow.
+- Retry mechanism added (5 attempts, 4-second delay).
+- Added comments, logging, and unit tests.
+- Added README with usage instructions.
+- Added CI/CD pipeline.
+
+### 📊 Performance
+- **75 minutes** (80 minutes with retry) for 15 topics  
+- Error rate (before retry):
+  - Summary: **77.6%**
+  - Article: **0.4%**
+- Error rate (after retry):
+  - Summary: **0%**
+  - Article: **0.2%**
+- **Memory usage:** 570 MB
+
+---
+
+## **Version 0.0.0 – Initial Prototype**
+
+### 🚧 Overview
+The first functional version of the crawler.  
+Operable but highly limited in structure, testing, and maintainability.
+
+### Key Characteristics
+- Used outdated layouts and URLs.
+- Basic URL fetching & parsing only.
+- No available historical snapshots → cannot fully test.
+- High coupling, poor naming conventions.
+- No unit tests.
+- All code in a single folder.
+
+### Workflow
+```
+main → prepare URL by topic → fetch URL → save JSON
+```
+
+---
+
+## 📝 Future Directions
+- Implement multithreading or async crawling.
+- Improve database schema.
+- Add monitoring dashboards.
+- Extend tests to integration and end-to-end.
+
+---

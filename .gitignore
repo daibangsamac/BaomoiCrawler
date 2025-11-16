@@ -1,0 +1,15 @@
+# Ignore output
+output/
+
+# Ignore IDE project files
+.vscode/
+
+# Ignore old version
+.old/
+
+# Ignore logs
+logs/
+
+# Ignore compiled class files
+bin/
+

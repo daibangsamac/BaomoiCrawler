@@ -15,27 +15,28 @@ Use cases include: collecting news articles, titles, descriptions and urls.
 ## Project Structure
 
 ```
-web-crawler/
+E:.
 ├───.github
 │   └───workflows
 ├───.old
 ├───.vscode
-├───backend
-│   ├───cmd
-│   └───internal # Source code
-│       ├───config
-│       ├───source
-│       └───test
-├───bin # bin
-├───frontend
-├───libs
-└───output
-    ├───sample
-    ├───the-gioi
-    ├───van-hoa
-    └───xa-hoi
-```
-
+├───bin # compile folder
+├───libs # contain external libraries
+├───output # Store Data
+└───src
+    ├───main
+    │   ├───controller
+    │   ├───dao
+    │   ├───model
+    │   ├───service
+    │   ├───util
+    │   └───view
+    └───test
+        └───main
+            ├───controller
+            ├───dao
+            ├───model
+            └───service
 ---
 
 # Usage
@@ -51,24 +52,20 @@ cd BaomoiCrawler
 ## Java
 
 # For windows
-```bash
-javac -cp "libs/*" -d bin $(find backend -name "*.java" || true)
-java -cp "bin;libs/*" backend.cmd.Main
-```
+
+execute build.bat
+execute run.bat
+
 # For Linux
 
-### Common Options
-
-`To be added`
----
+execute build.sh
+```
+java -cp "BaoMoiCrawler.jar:libs/*" src.main.Main
+```
 
 # Notes
 
 * Only crawl **public and legal** data.
-
-`On process`
-* Avoid overloading the server with too many requests.
-* Use proxies if necessary to prevent IP blocking.
 
 ---
 
