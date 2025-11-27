@@ -1,31 +1,37 @@
 package src.main.model;
 
+import java.time.Instant;
+
 /**
  * Class Article
  * <p>This class represents an article for <b>common news</b> with its attributes such as URL, time, title, topic, and content.</p>
- * @version 1.0
+ * @version 2.0
  * @author Nguyen Huu Quang	
  */
 public class Article {
-	
 	private String url;
-	private String time;
+	private int id;
+	private String og_url;
+	private String author;
 	private String title;
+	private Instant publish_date;
 	private String topic;
-	private String content;
+	private String body;
+	private String keywords; //json
 
-	// TODO: Use StringBuilder for htmlSource, Make a constructor to set htmlSource
-	private String htmlSource;
 	/**
 	 * Constructor of Article class
 	 */
 	public Article() {
 		this.url = null;
-		this.time = null;
+		this.id = 0;
+		this.og_url = null;
+		this.author = null;
 		this.title = null;
+		this.publish_date = null;
 		this.topic = null;
-		this.content = null;
-		this.htmlSource = null;
+		this.body = null;
+		this.keywords = null;
 	}
 
 	/**
@@ -36,114 +42,87 @@ public class Article {
 	 * @param topic Topic of the article
 	 * @param content Content of the article
 	 */
-	public Article(String url, String time, String title, String topic, String content) {
+	public Article(String url,int id,String og_url,String author,String title,Instant publish_date,String topic,String body,String keywords) {
 		this.url = url;
-		this.time = time;
+		this.id = id;
+		this.og_url = og_url;
+		this.author = author;
 		this.title = title;
+		this.publish_date = publish_date;
 		this.topic = topic;
-		this.content = content;
+		this.body = body;
+		this.keywords = keywords;
 	}
 
-	/**
-	 * Get url of article
-	 * @param _url
-	 */
-	public void setUrl(String _url) {
-		this.url = _url;
-	}
-	
-	/**
-	 * Set time of article
-	 * @param _time
-	 */
-	public void setTime(String _time) {
-		this.time = _time;
-	}
-	
-	/**
-	 * Set title of article
-	 * @param _title
-	 */
-	public void setTitle(String _title) {
-		this.title = _title;
-	}
-	
-	/**
-	 * Set category of article
-	 * @param _topic
-	 */
-	public void setTopic(String _topic) {
-		this.topic = _topic;
-	}
-	
-	/**
-	 * Set content of article
-	 * @param content
-	 */
-	public void setContent(String _content) {
-		this.content = _content;
-	}
-	
-	/**
-	 * Get url of article
-	 * @return string url of article
-	 */
 	public String getUrl() {
-		return this.url;
+		return url;
 	}
 
-	/**
-	 * Get time of article
-	 * @return string time of article
-	 */
-
-	public String getTime() {
-		if (this.time == null || this.time.isEmpty()) {
-			return "0000-01-01 00:00:00";
-		}
-		if (this.time.length() != 19) {
-			return "0000-01-01 00:00:00";
-		}
-		return this.time;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
-	/**
-	 * Get title of article
-	 * @return string title of article
-	 */
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getOg_url() {
+		return og_url;
+	}
+
+	public void setOg_url(String og_url) {
+		this.og_url = og_url;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
 	public String getTitle() {
-		return this.title;
+		return title;
 	}
 
-	/**
-	 * Get category of article
-	 * @return string category of article
-	 */
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public Instant getPublish_date() {
+		return publish_date;
+	}
+
+	public void setPublish_date(Instant publish_date) {
+		this.publish_date = publish_date;
+	}
+
 	public String getTopic() {
-		return this.topic;
+		return topic;
 	}
 
-	/**
-	 * Get content of article
-	 * @return string content of article
-	 */
-	public String getContent() {
-		return this.content;
-	}
-	
-	/**
-	 * Get HTML source of article
-	 * @return string HTML source of article
-	 */
-	public String getHtmlSource() {
-		return this.htmlSource;
+	public void setTopic(String topic) {
+		this.topic = topic;
 	}
 
-	/**
-	 * Set HTML source of article
-	 * @param htmlSource
-	 */
-	public void setHtmlSource(String htmlSource) {
-		this.htmlSource = htmlSource;
+	public String getBody() {
+		return body;
+	}
+
+	public void setBody(String body) {
+		this.body = body;
+	}
+
+	public String getKeywords() {
+		return keywords;
+	}
+
+	public void setKeywords(String keywords) {
+		this.keywords = keywords;
 	}
 }

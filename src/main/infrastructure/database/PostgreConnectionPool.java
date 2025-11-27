@@ -1,4 +1,4 @@
-package src.main.util;
+package src.main.infrastructure.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,24 +8,24 @@ import java.util.List;
 /**
  * Database Connection Pool class for managing database connections
  */
-public class DBConnectionPool {
-    private static final String URL = "jdbc:mysql://localhost:3306/data";
-    private static final String USER = "root";
+public class PostgreConnectionPool {
+    private static final String URL = "jdbc:postgresql://localhost:5432/BaoMoiData";
+    private static final String USER = "postgres";
     private static final String PASS = "11012004";
 
-    private static final int INITIAL_POOL_SIZE = 5;
-    private static final int MAX_POOL_SIZE = 20;
+    private static final int INITIAL_POOL_SIZE = 3;
+    private static final int MAX_POOL_SIZE = 10;
 
     private final List<Connection> availableConnections = new ArrayList<>();
     private final List<Connection> usedConnections = new ArrayList<>();
 
-    private static DBConnectionPool instance;
+    private static PostgreConnectionPool postgreConnectionPoolInstance;
 
     /**
      * Private constructor to initialize the connection pool
      * @throws Exception if a database access error occurs
      */
-    private DBConnectionPool() {
+    private PostgreConnectionPool() {
         try {
             for (int i = 0; i < INITIAL_POOL_SIZE; i++) {
                 availableConnections.add(createConnection());
@@ -39,11 +39,11 @@ public class DBConnectionPool {
      * Get the singleton instance of DBConnectionPool
      * @return The DBConnectionPool instance
      */
-    public static synchronized DBConnectionPool getInstance() {
-        if (instance == null) {
-            instance = new DBConnectionPool();
+    public static synchronized PostgreConnectionPool getInstance() {
+        if (postgreConnectionPoolInstance == null) {
+            postgreConnectionPoolInstance = new PostgreConnectionPool();
         }
-        return instance;
+        return postgreConnectionPoolInstance;
     }
 
     /**
